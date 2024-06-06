@@ -14,7 +14,9 @@ def register_user():
         return jsonify({"error":"User already exists!"}), 403
     
     new_user = User(
-        username=data.get('username')
+        username=data.get('username'),
+        email = data.get('password')
+
     )
 
     new_user.create_password(password=data.get('password'))  # Assuming create_password hashes and saves the password

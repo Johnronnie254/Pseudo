@@ -2,6 +2,7 @@ from flask import Flask
 from auth import auth_bp
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
+from flask_cors import CORS
 from models import db, User
 
 app = Flask(__name__)
@@ -9,10 +10,12 @@ app = Flask(__name__)
 # DATABASE CONFIGURATION
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://JohnRonnie254:Kenya%40254@localhost/pseudo'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+app.config['SECRET_KEY'] = 'johnronnieochieng'
+app.config['JWT_SECRET_KEY'] = 'johnronnieochieng'
 # Initialize Flask JWT Extended
 jwt = JWTManager(app)
 migrate = Migrate(app,db)
+CORS(app)
 
 # Initialize Flask SQLAlchemy
 db.init_app(app)

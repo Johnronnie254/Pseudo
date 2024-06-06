@@ -9,6 +9,7 @@ class User(db.Model):
     __tablename__ = 'users'
 
     username = db.Column(db.String(255), primary_key=True, nullable=False)
+    email = db.Column(db.String(255), nullable=False)
     password = db.Column(db.String(255), nullable=False)
 
     def create_password(self, password):

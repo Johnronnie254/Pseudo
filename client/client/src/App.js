@@ -1,6 +1,7 @@
 import NavBar from "./Navbar";
 import SignUp from './Signup';
 import LogIn from './Login';
+import Home from './Home'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -12,6 +13,7 @@ function App() {
       <div>
     <NavBar/>
     <Routes>
+      <Route path="/home" element={<Home />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<LogIn />} />
 

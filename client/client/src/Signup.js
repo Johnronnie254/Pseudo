@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 function SignUp() {
   const [formData, setFormData] = useState({
     username: '',
+    email: '',
     password: ''
   });
 
@@ -24,7 +25,7 @@ function SignUp() {
   };
 
   const handleNewSignUp = (formData) => {
-    fetch("https://aftab-xr9h.onrender.com/auth/register", {
+    fetch("http://127.0.0.1:5000/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -42,6 +43,7 @@ function SignUp() {
       alert("You have successfully Signed Up!");
       setFormData({
         username: '',
+        email: '',
         password: ''
       });
       // Redirect to login page after successful sign-up
@@ -62,6 +64,11 @@ function SignUp() {
           <Form.Group className="mb-3" controlId="formBasicUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control type="text" name="username" value={formData.username} placeholder="Username" onChange={handleInput} />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" name="email" value={formData.email} placeholder="email" onChange={handleInput} />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
