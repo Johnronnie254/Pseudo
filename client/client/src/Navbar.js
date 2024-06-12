@@ -4,7 +4,7 @@ import {  useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUsers, faVideo, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUsers, faVideo, faAngleDoubleRight, faInbox} from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'js-cookie';
 
 export default function NavBar() {
@@ -30,11 +30,14 @@ export default function NavBar() {
             {/* Show different links based on login status */}
             {token ? (
               <>
-                <Nav.Link href="home" style={{ color: 'white', marginRight: '10px' }}> <FontAwesomeIcon icon={faHome} /> </Nav.Link>
-                <Nav.Link href="friends" style={{ color: 'white', marginRight: '10px' }}> <FontAwesomeIcon icon={faUsers} /></Nav.Link>
-                <Nav.Link href="videos" style={{ color: 'white', marginRight: '10px' }}> <FontAwesomeIcon icon={faVideo} /></Nav.Link>
-                <Nav.Link href="#" onClick={handleLogout} style={{ color: 'white', marginRight: '10px' }}>Logout</Nav.Link>
-              </>
+    <Nav.Link href="home" style={{ color: 'white', marginRight: '10px' }}> <FontAwesomeIcon icon={faHome} /> </Nav.Link>
+    <Nav.Link href="friends" style={{ color: 'white', marginRight: '10px' }}> <FontAwesomeIcon icon={faUsers} /></Nav.Link>
+    <Nav.Link href="videos" style={{ color: 'white', marginRight: '10px' }}> <FontAwesomeIcon icon={faVideo} /></Nav.Link>
+    <Nav.Link href="inbox" style={{ color: 'white', marginRight: '10px' }}> <FontAwesomeIcon icon={faInbox} /></Nav.Link>
+    <Nav.Link href="profile" style={{ color: 'white', marginRight: '10px' }}>  Profile</Nav.Link>
+    <Nav.Link href="#" onClick={handleLogout} style={{ color: 'white', marginRight: '10px' }}>Logout</Nav.Link>
+</>
+
             ) : (
               <>
                 <Nav.Link href="signup" style={{ color: 'white', marginRight: '10px' }}> Sign Up</Nav.Link>
