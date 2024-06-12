@@ -9,9 +9,14 @@ export default function Profile() {
     const [isEditing, setIsEditing] = useState(false);
     const [newBio, setNewBio] = useState('');
     const [username, setUsername] = useState('john_doe'); // Replace with the logged-in user's username
+    const [profilePosts, setProfilePosts] = useState([]);
 
     useEffect(() => {
-        // Fetch bio on component mount
+        fetchBio();
+        fetchProfilePosts();
+    }, [username]);
+
+    const fetchBio = () => {
         fetch(`http://127.0.0.1:5000/bio/${username}`)
             .then(response => response.json())
             .then(data => {
@@ -20,11 +25,22 @@ export default function Profile() {
             .catch(error => {
                 console.error('Error fetching bio:', error);
             });
-    }, [username]);
+    };
+
+    const fetchProfilePosts = () => {
+        fetch(`http://127.0.0.1:5000/profile/${username}/posts`)
+            .then(response => response.json())
+            .then(data => {
+                setProfilePosts(data);
+            })
+            .catch(error => {
+                console.error('Error fetching profile posts:', error);
+            });
+    };
 
     const handleEditing = () => {
         setIsEditing(true);
-        setNewBio(bio); // Set newBio to the current bio when editing starts
+        setNewBio(bio);
     };
 
     const handleSave = () => {
@@ -54,7 +70,7 @@ export default function Profile() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://127.0.0.1:5000/home', {
+        fetch('http://127.0.0.1:5000/profile/post', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -66,7 +82,7 @@ export default function Profile() {
         })
         .then(response => response.json())
         .then(data => {
-            // Handle post submission success
+            setProfilePosts([...profilePosts, { content: textMessage, username: username }]);
             setTextMessage('');
         })
         .catch(error => {
@@ -108,6 +124,14 @@ export default function Profile() {
                     Post
                 </Button>
             </Form>
+            <div className="profile-posts">
+                {profilePosts.map((post, index) => (
+                    <div key={index} className="post">
+                        <p className="post-content">{post.content}</p>
+                        <p className="post-info">Posted by: {post.username}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
